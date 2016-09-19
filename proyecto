@@ -10,17 +10,11 @@ namespace inicio
         
         public void imprimir(string [] operacion) 
         {
-            /*Console.Clear();
-            byte posx = 5;
-            for (int i = 0; i <= 19; i++)
-            {
-                Console.SetCursorPosition(posx, 6); Console.WriteLine(operacion[i]);
-                posx += 1;
-            }*/
+            
 
             Console.SetCursorPosition(18,6); Console.WriteLine("Resultado = " + operacion[1]);
             Console.ReadKey();
-        }///fin  public void imprimir
+        }
       
     }
 
@@ -28,14 +22,14 @@ namespace inicio
     {
        
 
-        public void buscaresp(byte pcdo, byte pdato, string[] operacion)///busca los espacion dentro del parentesis 
+        public void buscaresp(byte espacio, byte pdato, string[] operacion)
         {
             string cambio;
-            pcdo -= 2;
+            espacio -= 2;
             
-            for (; pdato <= pcdo; pdato++) ////for 1-3
+            for (; pdato <= espacio; pdato++) 
             {
-                if (operacion[pdato] == " ")////if 1-3 
+                if (operacion[pdato] == " ")
                 {
                      pdato += 2;
                      cambio = operacion[pdato];
@@ -44,23 +38,22 @@ namespace inicio
                      pdato += 2;
                      operacion[pdato] = " ";
                      pdato -= 2;
-                }///fin if 1-3
-            }////fin for 1-3
+                }
+            }
 
             
 
-            //Console.WriteLine(operacion[2]);
         
-        }///fin buscaresp
+        }
 
 
-        public void organiza(byte pcdo, byte pdato, string[] operacion)////organiza toda la expresion quitando los espacios en blanco 
+        public void organiza(byte espacio, byte pdato, string[] operacion)
         {
             byte ultimo = 0; string cambio; byte posb =0;
-            pcdo = 19;
-            while (pcdo >= 1)
+            espacio = 20;
+            while (espacio >= 1)
             {
-                ultimo = pcdo;
+                ultimo = espacio;
                 while (ultimo >= 1)
                 {
                     posb = Convert.ToByte(ultimo - 1);
@@ -72,187 +65,171 @@ namespace inicio
                             operacion[posb] = cambio;
                             operacion[ultimo] = " ";
                             posb--;
-                        }///fin while que busca las posiciones vacias
+                        }
                     }
                     ultimo--;
 
-                }///fin while que busca desde el ultimo       
+                }    
 
-                pcdo--; 
-            }///fin pcdo
+                espacio--; 
+            }
 
-           // Console.WriteLine(operacion[2]);
-        }///fin opublic void organiza 
+           
+        }
 
         
         public void parentesis (string [] operacion, byte pfin) 
         {
-            byte abierto = 0, pcdo = 0, pdato = 0,a,b,k,contar;  ///k revisa la operacion antes del parentesis
+            byte abierto = 0, espacio = 0, pdato = 0,a,b,k,contar;  
             double x=0, y=0, resultado=0;
             partedos organizar = new partedos();
             partedos acomodar = new partedos();
 
-            while(abierto==0)///while1---crear un siclo que busque los parentesis si no los hay coloca el abierto en 0
+            while(abierto==0)
             {
-                for (byte i = 0; i <=pfin ; i++)///for que recorre////cambiar por un while
+                for (byte i = 0; i <=pfin ; i++)
                 {
-                    if ( (operacion[i] == "(") )//if-1 
+                    if ( (operacion[i] == "(") )
                     {
-                        pdato = i; pcdo = i; pcdo += 1;
-                        while( (operacion[pcdo] !="(") && (operacion[pcdo]!=")"))//while que busca la termiancion del parentesis
+                        pdato = i; espacio = i; espacio += 1;
+                        while( (operacion[espacio] !="(") && (operacion[espacio]!=")"))
                         {
-                            pcdo += 1;
-                        }///fin while que busca la termiancion del parentesis
+                            espacio += 1;
+                        }
 
-                        if (operacion[pcdo] != "(") 
+                        if (operacion[espacio] != "(") 
                         {
                             byte j=Convert.ToByte (pdato + 1);
-                            for (; j <= pcdo;j++ )///for-2 como primero se realizan las * & / realizo este for
+                            for (; j <= espacio;j++ )
                             {
-                                if (operacion[j] == "*")//if-2
+                                if (operacion[j] == "*")
                                 {
                                     a = j; b = j;
                                     a -= 1; b += 1;
                                     x = Convert.ToDouble(operacion[a]); y = Convert.ToDouble(operacion[b]);
                                     resultado = x * y;
 
-                                    //// ahora escribo el resultado en la posicion  anterior al asterisco
-                                    //// & borro las otras dos posiciones                            /**/ 
                                     /**/ a = j; b = j;                                              /**/
                                     /**/ a -= 1; b += 1;                                           /**/
                                     /**/ operacion[a] = Convert.ToString(resultado);              /**/
                                     /**/ operacion[j] = " "; operacion[b] = " ";                 /**/
-                                    ////////////////////////////////////////////////////////////////
+                                    
                                     j = a;
-                                    organizar.buscaresp(pcdo, pdato, operacion);
-                                    acomodar.organiza(pcdo, pdato, operacion);
-                                    pcdo -= 2;
-                                }//fin if-2
+                                    organizar.buscaresp(espacio, pdato, operacion);
+                                    acomodar.organiza(espacio, pdato, operacion);
+                                    espacio -= 2;
+                                }
                                 else
                                 {
-                                    if (operacion[j] == "/")//if-3
+                                    if (operacion[j] == "/")
                                     {
                                         a = j; b = j;
                                         a -= 1; b += 1;
                                         x = Convert.ToDouble(operacion[a]); y = Convert.ToDouble(operacion[b]);
                                         resultado = x / y;
 
-                                        //// ahora escribo el resultado en la posicion  anterior al asterisco
-                                        //// & borro las otras dos posiciones                            /**/ 
+                                       
                                         /**/ a = j; b = j;                                              /**/
                                         /**/ a -= 1; b += 1;                                           /**/
                                         /**/ operacion[a] = Convert.ToString(resultado);              /**/
                                         /**/ operacion[j] = " "; operacion[b] = " ";                 /**/
-                                        ////////////////////////////////////////////////////////////////
+                                      
                                         j = a;
-                                        organizar.buscaresp(pcdo, pdato, operacion);
-                                        acomodar.organiza(pcdo, pdato, operacion);
+                                        organizar.buscaresp(espacio, pdato, operacion);
+                                        acomodar.organiza(espacio, pdato, operacion);
 
-                                        pcdo -= 2;
-                                    }//fin if-3
+                                        espacio -= 2;
+                                    }
                                     
-                                }///fin else que  conduce a la divicion
+                                }
                                 
                             
-                            }///fin for-2
-                             ///
-
-
-
-                            ////////////////operaciones secundarias
+                            }
+                             
+                         
                             j = Convert.ToByte(pdato + 1);
-                            for (; j <= pcdo; j++)///for-3 con este for realizo las operaciones secundarias
+                            for (; j <= espacio; j++)
                             {
-                                if (operacion[j] == "+")//if-4
+                                if (operacion[j] == "+")
                                 {
                                     a = j; b = j;
                                     a -= 1; b += 1;
                                     x = Convert.ToDouble(operacion[a]); y = Convert.ToDouble(operacion[b]);
                                     resultado = x + y;
 
-                                    //// ahora escribo el resultado en la posicion  anterior al asterisco
-                                    //// & borro las otras dos posiciones                            /**/ 
+                                 
                                     /**/ a = j; b = j;
                                     /**/ a -= 1; b += 1;                                           /**/
                                     /**/ operacion[a] = Convert.ToString(resultado);              /**/
                                     /**/ operacion[j] = " "; operacion[b] = " ";                 /**/
-                                    ////////////////////////////////////////////////////////////////
+                                   
                                     j = a;
-                                    organizar.buscaresp(pcdo, pdato, operacion);
-                                    acomodar.organiza(pcdo, pdato, operacion);
-                                    pcdo -= 2;
-                                }//fin if-4
+                                    organizar.buscaresp(espacio, pdato, operacion);
+                                    acomodar.organiza(espacio, pdato, operacion);
+                                    espacio -= 2;
+                                }
                                 else
                                 {
-                                    if (operacion[j] == "-")//if-5
+                                    if (operacion[j] == "-")
                                     {
                                         a = j; b = j;
                                         a -= 1; b += 1;
                                         x = Convert.ToDouble(operacion[a]); y = Convert.ToDouble(operacion[b]);
                                         resultado = x - y;
-
-                                        //// ahora escribo el resultado en la posicion  anterior al asterisco
-                                        //// & borro las otras dos posiciones                            /**/ 
+ 
                                         /**/ a = j; b = j;                                              /**/
                                         /**/ a -= 1; b += 1;                                           /**/
                                         /**/ operacion[a] = Convert.ToString(resultado);              /**/
                                         /**/ operacion[j] = " "; operacion[b] = " ";                 /**/
-                                        ////////////////////////////////////////////////////////////////
+                                      
                                         j = a;
-                                        organizar.buscaresp(pcdo, pdato, operacion);
-                                        acomodar.organiza(pcdo, pdato, operacion);
-                                        pcdo -= 2;
-                                    }//fin if-5
+                                        organizar.buscaresp(espacio, pdato, operacion);
+                                        acomodar.organiza(espacio, pdato, operacion);
+                                        espacio -= 2;
+                                    }
 
-                                }///fin else que  conduce a la divicion
-
-
-                            }///fin for-2
-                            ///
+                                }
 
 
-                            ///////////////fin for-3
+                            }
+                                                       
                             if (pdato >= 1)
                             {
                                 k = Convert.ToByte(pdato - 1);
                                 if (operacion[k] == "+" || operacion[k] == "(" || operacion[k] == ")" || operacion[k] == "-" || operacion[k] == "*" || operacion[k] == "/")
                                 {
-                                    operacion[pdato] = " "; operacion[pcdo] = " ";
-                                    acomodar.organiza(pcdo, pdato, operacion);
+                                    operacion[pdato] = " "; operacion[espacio] = " ";
+                                    acomodar.organiza(espacio, pdato, operacion);
 
                                 }
                                 else
                                 {
-                                    operacion[pdato] = "*"; operacion[pcdo] = " ";
-                                    acomodar.organiza(pcdo, pdato, operacion);
+                                    operacion[pdato] = "*"; operacion[espacio] = " ";
+                                    acomodar.organiza(espacio, pdato, operacion);
                                 }
-                            }///fin pto>=1
-                               
-                               //Console.SetCursorPosition(15, 12); Console.WriteLine(operacion[0]);
+                            }
+                              
+                          
                             contar=0;
-                            for (int z = 0; z <= 19; z++)///for que busca haber cuantos parentesis hay
+                            for (int z = 0; z <= 19; z++)
                             {
                                 if (operacion[z] == "(")
                                 {
                                     contar++;
                                 }
-                            }///fin for que busca haber cuantos parentesis hay
+                            }
 
                             if (contar == 1)  abierto = 1;
 
-                        }///fin si del parentesis != abierto
-                         ///
+                        }
+                         
+                         }
+                }
+            }
 
-
-                        ///como termino las operaciones dentro de los parentesis los borro
-                        
-                    }///fin if-1
-                }///fin for que recorre
-            }///fin while1
-
-        }///fin public void parentesis
+        }
     
-    }///fin class partedos
+    }
 
     class parteuno
     {
@@ -289,7 +266,7 @@ namespace inicio
                             operacion[pos] = operacion[pos] + temp1;
                         }
 
-                    }///fin temp2==" "
+                    }
                     else
                     {
                         if (temp1 == "+" || temp1 == "(" || temp1 == ")" || temp1 == "-" || temp1 == "*" || temp1 == "/")
@@ -309,10 +286,10 @@ namespace inicio
                         {
                             operacion[pos] = operacion[pos] + temp1;
                         }
-                    }//fin else de temp2==" "
+                    }
 
 
-                }///fin temp1 != /r
+                }
                 else 
                 {
                     pfin = pos;
@@ -340,7 +317,7 @@ namespace inicio
                     }
 
 
-                }///fin temp2 != /r
+                }
                 else
                 {
                     pfin = pos;
@@ -348,13 +325,7 @@ namespace inicio
 
             } while ((pos < 19) && (temp1 != "\r") && (temp2 != "\r"));
 
-           /* Console.SetCursorPosition(2, 4);Console.WriteLine(" ------ ");
-            for (int i = 0; i <= 9; i++)
-            {
-                
-                Console.WriteLine(operacion[i]);
-
-            }*/
+          
 
 
             enviar.parentesis(operacion,pfin);
@@ -367,7 +338,7 @@ namespace inicio
                 Console.SetCursorPosition(posx, 6); Console.WriteLine(operacion[m]);
                 posx += 1;
             }
-            //Console.ReadKey();
-        }///fin main
-    }///fin class
-}///fin namespace
+            
+        }
+    }
+}
