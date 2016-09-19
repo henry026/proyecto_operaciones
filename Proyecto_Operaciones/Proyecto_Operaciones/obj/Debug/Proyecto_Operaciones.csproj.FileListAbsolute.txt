@@ -4,3 +4,9 @@ C:\Users\Windows 8\Documents\SharpDevelop Projects\Proyecto_Operaciones\Proyecto
 C:\Users\Windows 8\Documents\SharpDevelop Projects\Proyecto_Operaciones\Proyecto_Operaciones\obj\Debug\Proyecto_Operaciones.csprojResolveAssemblyReference.cache
 C:\Users\Windows 8\Documents\SharpDevelop Projects\Proyecto_Operaciones\Proyecto_Operaciones\obj\Debug\Proyecto_Operaciones.exe
 C:\Users\Windows 8\Documents\SharpDevelop Projects\Proyecto_Operaciones\Proyecto_Operaciones\obj\Debug\Proyecto_Operaciones.pdb
+D:\proyecto\Proyecto_Operaciones\Proyecto_Operaciones\bin\Debug\Proyecto_Operaciones.exe.config
+D:\proyecto\Proyecto_Operaciones\Proyecto_Operaciones\bin\Debug\Proyecto_Operaciones.exe
+D:\proyecto\Proyecto_Operaciones\Proyecto_Operaciones\bin\Debug\Proyecto_Operaciones.pdb
+D:\proyecto\Proyecto_Operaciones\Proyecto_Operaciones\obj\Debug\Proyecto_Operaciones.csprojResolveAssemblyReference.cache
+D:\proyecto\Proyecto_Operaciones\Proyecto_Operaciones\obj\Debug\Proyecto_Operaciones.exe
+D:\proyecto\Proyecto_Operaciones\Proyecto_Operaciones\obj\Debug\Proyecto_Operaciones.pdb
